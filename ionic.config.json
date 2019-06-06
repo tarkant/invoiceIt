@@ -1,5 +1,7 @@
 {
   "name": "invoiceIt",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
