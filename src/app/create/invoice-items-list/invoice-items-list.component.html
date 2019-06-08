@@ -1,0 +1,67 @@
+<ion-card>
+  <ion-card-header>
+    <ion-row>
+      <ion-col>Date</ion-col>
+      <ion-col>Nombre d'heures</ion-col>
+      <ion-col>Nom - Lieu</ion-col>
+      <ion-col>Prix unitaire HT</ion-col>
+      <ion-col>TVA</ion-col>
+      <ion-col>Prix TTC</ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-card-header>
+  <ion-item *ngFor="let item of invoiceItems; index as i">
+    <ion-col>{{item.date | date: 'dd/MM/yyyy'}}</ion-col>
+    <ion-col>{{item.hoursCount}}</ion-col>
+    <ion-col>{{item.description}}</ion-col>
+    <ion-col>{{item.unitPrice}}</ion-col>
+    <ion-col>{{item.vat}}</ion-col>
+    <ion-col>{{item.price}}</ion-col>
+    <ion-col>
+      <ion-button color="secondary">
+        <ion-icon name="create"></ion-icon> Modifier
+      </ion-button>
+    </ion-col>
+  </ion-item>
+  <ion-item>
+    <form [formGroup]="newItem" (ngSubmit)="addItem()">
+      <ion-row>
+        <ion-col>
+          <ion-datetime display-format="MM/DD/YYYY" picker-format="MM/DD/YYYY" placeholder="Date"
+            formControlName="date">
+          </ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-input class="col" placeholder="Nombre d'heures" type="number" formControlName="hoursCount"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input class="col" placeholder="Nom - Lieu" type="text" formControlName="description"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input class="col" placeholder="Prix unitaire HT" type="number" formControlName="unitPrice"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input class="col" placeholder="TVA" readonly type="number" formControlName="vat"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-input class="col" placeholder="Prix TTC" readonly type="number" formControlName="price"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-button [disabled]="newItem.invalid" type="submit">
+            <ion-icon name="add"></ion-icon> Ajouter
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-item>
+  <ion-item>
+    <ion-row>
+      <ion-col>
+        Total
+      </ion-col>
+      <ion-col>
+        0 €
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-card>
