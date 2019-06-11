@@ -18,7 +18,7 @@
     <ion-col>{{item.vat}}</ion-col>
     <ion-col>{{item.price}}</ion-col>
     <ion-col>
-      <ion-button color="secondary">
+      <ion-button color="secondary" (click)="editItem(item)">
         <ion-icon name="create"></ion-icon> Modifier
       </ion-button>
     </ion-col>

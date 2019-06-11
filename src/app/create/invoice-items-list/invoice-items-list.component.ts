@@ -42,7 +42,16 @@ export class InvoiceItemsListComponent implements OnInit {
       vat: this.newItem.controls.vat.value,
       price: this.newItem.controls.price.value,
     });
-    console.log(this.invoiceItems);
     this.invoiceItemsChange.emit(this.invoiceItems);
+    this.newItem.reset();
+  }
+
+  public editItem(item: InvoiceItem) {
+    this.newItem.controls.date.setValue(item.date);
+    this.newItem.controls.hoursCount.setValue(item.hoursCount);
+    this.newItem.controls.description.setValue(item.description);
+    this.newItem.controls.unitPrice.setValue(item.unitPrice);
+    this.newItem.controls.vat.setValue(item.vat);
+    this.newItem.controls.price.setValue(item.price);
   }
 }
