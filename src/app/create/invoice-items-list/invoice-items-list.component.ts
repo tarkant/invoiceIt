@@ -54,4 +54,9 @@ export class InvoiceItemsListComponent implements OnInit {
     this.newItem.controls.vat.setValue(item.vat);
     this.newItem.controls.price.setValue(item.price);
   }
+
+  public deleteItem(item: InvoiceItem) {
+    const index = this.invoiceItems.indexOf(item);
+    this.invoiceItems.splice(index, 1);
+  }
 }
