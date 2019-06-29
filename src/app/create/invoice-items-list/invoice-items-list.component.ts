@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceItem } from 'src/app/models/invoice-item.model';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+/**
+ * Takes care of the item list loop & can be double-way binded
+ * to be able to easily get its data.
+ */
 @Component({
   selector: 'app-invoice-items-list',
   templateUrl: './invoice-items-list.component.html',
@@ -13,10 +17,17 @@ export class InvoiceItemsListComponent implements OnInit {
   @Input()
   public invoiceItems: Array<InvoiceItem> = [];
 
+  @Input()
+  public unit: string = '€';
+
   @Output()
   public invoiceItemsChange = new EventEmitter<InvoiceItem[]>();
 
   public newItem: FormGroup;
+
+  public total: number = 0;
+
+  public vat: number = 20;
 
   constructor(
     private formBuilder: FormBuilder
@@ -44,6 +55,7 @@ export class InvoiceItemsListComponent implements OnInit {
     });
     this.invoiceItemsChange.emit(this.invoiceItems);
     this.newItem.reset();
+    console.log(this.invoiceItems);
   }
 
   public editItem(item: InvoiceItem) {
@@ -58,5 +70,9 @@ export class InvoiceItemsListComponent implements OnInit {
   public deleteItem(item: InvoiceItem) {
     const index = this.invoiceItems.indexOf(item);
     this.invoiceItems.splice(index, 1);
+  }
+
+  public calcTotal() {
+    
   }
 }

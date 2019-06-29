@@ -5,7 +5,7 @@
       <ion-col>Nombre d'heures</ion-col>
       <ion-col>Nom - Lieu</ion-col>
       <ion-col>Prix unitaire HT</ion-col>
-      <ion-col>TVA</ion-col>
+      <ion-col>TVA %</ion-col>
       <ion-col>Prix TTC</ion-col>
       <ion-col></ion-col>
     </ion-row>
@@ -41,13 +41,13 @@
           <ion-input class="col" placeholder="Nom - Lieu" type="text" formControlName="description"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="Prix unitaire HT" type="number" formControlName="unitPrice"></ion-input>
+          <ion-input class="col" placeholder="Prix unitaire HT" type="number" [min]="0" [step]="5" [value]="(newItem.value.price / (1 + this.vat / 100))" formControlName="unitPrice"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="TVA" readonly type="number" formControlName="vat"></ion-input>
+          <ion-input class="col" placeholder="TVA" readonly type="number" [value]="this.vat" formControlName="vat"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="Prix TTC" readonly type="number" formControlName="price"></ion-input>
+          <ion-input class="col" placeholder="Prix TTC" type="number" [value]="(newItem.value.unitPrice * (1 + (this.vat / 100))) * newItem.value.hoursCount" formControlName="price"></ion-input>
         </ion-col>
         <ion-col>
           <ion-button [disabled]="newItem.invalid" type="submit">
@@ -63,7 +63,7 @@
         Total
       </ion-col>
       <ion-col>
-        0 €
+        0 {{ unit }}
       </ion-col>
     </ion-row>
   </ion-item>
