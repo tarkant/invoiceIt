@@ -72,7 +72,11 @@ export class InvoiceItemsListComponent implements OnInit {
     this.invoiceItems.splice(index, 1);
   }
 
-  public calcTotal() {
-    
+  public calcTotal(): number {
+    if (this.invoiceItems.length > 0) {
+      return this.invoiceItems.map(el => el.price).reduce((acc, val) => acc + val, 0);
+    } else {
+      return 0;
+    }
   }
 }
