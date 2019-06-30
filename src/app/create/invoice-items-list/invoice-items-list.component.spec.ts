@@ -30,4 +30,66 @@ describe('InvoiceItemsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Total should be 0 on 0 items', () => {
+    expect(component.calcTotal()).toEqual(0);
+  })
+
+  it('Total should be 0 with items with 0 price', () => {
+    component.invoiceItems = [
+      {
+        date: null,
+        description: null,
+        hoursCount: 1,
+        price: 0,
+        unitPrice: 0,
+        vat: 0,
+      },
+      {
+        date: null,
+        description: null,
+        hoursCount: 1,
+        price: 0,
+        unitPrice: 0,
+        vat: 0,
+      },
+    ];
+    expect(component.calcTotal()).toEqual(0);
+  });
+
+  it('Total should be 40 with two items', () => {
+    component.invoiceItems = [
+      {
+        date: null,
+        description: null,
+        hoursCount: 1,
+        price: 30,
+        unitPrice: 0,
+        vat: 0,
+      },
+      {
+        date: null,
+        description: null,
+        hoursCount: 1,
+        price: 10,
+        unitPrice: 0,
+        vat: 0,
+      },
+    ];
+    expect(component.calcTotal()).toEqual(40);
+  });
+
+  it('Total should be 42 with one item', () => {
+    component.invoiceItems = [
+      {
+        date: null,
+        description: null,
+        hoursCount: 1,
+        price: 42,
+        unitPrice: 0,
+        vat: 0,
+      },
+    ];
+    expect(component.calcTotal()).toEqual(42);
+  });
 });
