@@ -33,7 +33,7 @@ describe('InvoiceItemsListComponent', () => {
 
   it('Total should be 0 on 0 items', () => {
     expect(component.calcTotal()).toEqual(0);
-  })
+  });
 
   it('Total should be 0 with items with 0 price', () => {
     component.invoiceItems = [
