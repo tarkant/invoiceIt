@@ -1,24 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { InvoiceItem } from 'src/app/models/invoice-item.model';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { InvoiceItem } from "src/app/models/invoice-item.model";
+import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 
 /**
  * Takes care of the item list loop & can be double-way binded
  * to be able to easily get its data.
  */
 @Component({
-  selector: 'app-invoice-items-list',
-  templateUrl: './invoice-items-list.component.html',
-  styleUrls: ['./invoice-items-list.component.scss'],
+  selector: "app-invoice-items-list",
+  templateUrl: "./invoice-items-list.component.html",
+  styleUrls: ["./invoice-items-list.component.scss"]
 })
 export class InvoiceItemsListComponent implements OnInit {
-
-
   @Input()
   public invoiceItems: Array<InvoiceItem> = [];
 
   @Input()
-  public unit: string = '€';
+  public unit: string = "€";
 
   @Output()
   public invoiceItemsChange = new EventEmitter<InvoiceItem[]>();
@@ -29,19 +27,17 @@ export class InvoiceItemsListComponent implements OnInit {
 
   public vat: number = 20;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.newItem = this.formBuilder.group({
       date: [null, Validators.required],
       hoursCount: [0],
-      description: ['', Validators.required],
+      description: ["", Validators.required],
       unitPrice: [null, Validators.required],
       vat: [0],
       price: [0]
-    })
+    });
   }
 
   public addItem() {
@@ -51,11 +47,10 @@ export class InvoiceItemsListComponent implements OnInit {
       description: this.newItem.controls.description.value,
       unitPrice: this.newItem.controls.unitPrice.value,
       vat: this.newItem.controls.vat.value,
-      price: this.newItem.controls.price.value,
+      price: this.newItem.controls.price.value
     });
     this.invoiceItemsChange.emit(this.invoiceItems);
     this.newItem.reset();
-    console.log(this.invoiceItems);
   }
 
   public editItem(item: InvoiceItem) {
@@ -70,11 +65,14 @@ export class InvoiceItemsListComponent implements OnInit {
   public deleteItem(item: InvoiceItem) {
     const index = this.invoiceItems.indexOf(item);
     this.invoiceItems.splice(index, 1);
+    this.invoiceItemsChange.emit(this.invoiceItems);
   }
 
   public calcTotal(): number {
     if (this.invoiceItems.length > 0) {
-      return this.invoiceItems.map(el => el.price).reduce((acc, val) => acc + val, 0);
+      return this.invoiceItems
+        .map(el => el.price)
+        .reduce((acc, val) => acc + val, 0);
     } else {
       return 0;
     }

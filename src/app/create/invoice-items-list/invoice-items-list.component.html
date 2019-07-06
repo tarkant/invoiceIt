@@ -30,7 +30,7 @@
     <form [formGroup]="newItem" (ngSubmit)="addItem()">
       <ion-row>
         <ion-col>
-          <ion-datetime display-format="MM/DD/YYYY" picker-format="MM/DD/YYYY" placeholder="Date"
+          <ion-datetime display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" placeholder="Date"
             formControlName="date">
           </ion-datetime>
         </ion-col>
@@ -41,13 +41,17 @@
           <ion-input class="col" placeholder="Nom - Lieu" type="text" formControlName="description"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="Prix unitaire HT" type="number" [min]="0" [step]="5" formControlName="unitPrice"></ion-input>
+          <ion-input class="col" placeholder="Prix unitaire HT" type="number" [min]="0" [step]="5"
+            formControlName="unitPrice"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="TVA" readonly type="number" [value]="this.vat" formControlName="vat"></ion-input>
+          <ion-input class="col" placeholder="TVA" readonly type="number" [value]="this.vat" formControlName="vat">
+          </ion-input>
         </ion-col>
         <ion-col>
-          <ion-input class="col" placeholder="Prix TTC" readonly type="number" [value]="(newItem.value.unitPrice * (1 + (this.vat / 100))) * newItem.value.hoursCount" formControlName="price"></ion-input>
+          <ion-input class="col" placeholder="Prix TTC" readonly type="number"
+            [value]="(newItem.value.unitPrice * (1 + (this.vat / 100))) * newItem.value.hoursCount"
+            formControlName="price"></ion-input>
         </ion-col>
         <ion-col>
           <ion-button [disabled]="newItem.invalid" type="submit">
