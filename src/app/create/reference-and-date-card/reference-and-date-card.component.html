@@ -1,11 +1,15 @@
 <ion-card>
-  <ion-item href="#" class="activated">
+  <ion-item class="activated">
     <ion-icon name="barcode" slot="start"></ion-icon>
     <ion-label>Référence : {{ refAndDate.reference }}</ion-label>
   </ion-item>
 
-  <ion-item href="#">
+  <ion-item>
     <ion-icon name="calendar" slot="start"></ion-icon>
-    <ion-label>Date : {{ refAndDate.date | date : 'dd/MM/yyyy' }}</ion-label>
+    Date :
+    <form [formGroup]="dateForm">
+      <ion-datetime display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY" placeholder="Date" formControlName="date">
+      </ion-datetime>
+    </form>
   </ion-item>
 </ion-card>
