@@ -1,18 +1,30 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CreatePage } from './create.page';
+import { CreatePage } from "./create.page";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { Observable } from "rxjs";
 
-describe('CreatePage', () => {
+describe("CreatePage", () => {
+  const mockAngularFirestore = {
+    collection: name => {
+      return {
+        valueChanges: () => {
+          return new Observable(null);
+        }
+      };
+    }
+  };
+
   let component: CreatePage;
   let fixture: ComponentFixture<CreatePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatePage ],
+      declarations: [CreatePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+      providers: [{ provide: AngularFirestore, useValue: mockAngularFirestore }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +33,7 @@ describe('CreatePage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

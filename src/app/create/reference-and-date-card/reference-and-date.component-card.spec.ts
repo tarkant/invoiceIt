@@ -2,6 +2,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ReferenceAndDateCardComponent } from "./reference-and-date-card.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { IonicModule } from "@ionic/angular";
 
 describe("ReferenceAndDateComponent", () => {
   let component: ReferenceAndDateCardComponent;
@@ -10,7 +13,8 @@ describe("ReferenceAndDateComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ReferenceAndDateCardComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule]
     }).compileComponents();
   }));
 

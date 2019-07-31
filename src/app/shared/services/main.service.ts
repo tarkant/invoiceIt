@@ -14,5 +14,5 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class MainService {
-  constructor(private fire) {}
+  constructor() {}
 }
