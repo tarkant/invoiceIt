@@ -11,22 +11,40 @@
 
 <ion-content>
   <ion-list>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>Reference</ion-col>
+      <ion-col>Date</ion-col>
+      <ion-col>Client</ion-col>
+      <ion-col>Société</ion-col>
+      <ion-col>Total</ion-col>
+    </ion-row>
+    <ion-item-divider>
+    </ion-item-divider>
     <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
+      <ion-col>
+        <ion-icon name="document"></ion-icon>
+      </ion-col>
+      <ion-col>
+        {{item.refAndDate.reference}}
+      </ion-col>
+      <ion-col>
+        {{item.refAndDate.date | date: 'dd/MM/yyyy'}}
+      </ion-col>
+      <ion-col>
+        {{ item.clientInfo.name }}
+      </ion-col>
+      <ion-col>
+        {{ item.clientInfo.company }}
+      </ion-col>
+      <ion-col>
+        {{item.total}} {{item.unit}}
+      </ion-col>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button [routerDirection]="'root'" [routerLink]="'/create'">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
 </ion-content>
